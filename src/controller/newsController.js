@@ -27,7 +27,7 @@ const newsLatest=async (req, res)=> {
       .get(`${base_url}&q=${keyword}`)
       .then((response) => {
         const articles = response.data.articles;
-  
+   
         if (articles.length == 0)
           return res.status(404).send({ message: "no news found" });
         let news = [];
