@@ -33,9 +33,7 @@ const newsLatest=async (req, res)=> {
         let news = [];
   
         for (let i = 0; i < articles.length; i++) {
-          console.log(`${i + 1}. ${articles[i].title}`);
-          console.log(`   ${articles[i].description}`);
-  
+
           let obj = {
             title: `${i + 1}. ${articles[i].title}`,
             description: articles[i].description,
@@ -48,7 +46,7 @@ const newsLatest=async (req, res)=> {
         return res.status(200).send({status: true,message: `Showing top  results for "${keyword}"`,data: news});
     
     }).catch((error) => {
-        console.error(error);
+      return res.send({status:false,message:error.message})
       });
 
 

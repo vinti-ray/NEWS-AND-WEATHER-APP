@@ -41,8 +41,8 @@ const weatherReport=async (req, res) => {
 
     })
     .catch((err) => {
-      console.error(`Error: ${err.message}`);
-      return res.send(`Error: ${err.message}`)
+      
+      return res.send({status:false,message:err.message})
 
     });
 
