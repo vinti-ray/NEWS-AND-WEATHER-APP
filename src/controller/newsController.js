@@ -27,21 +27,25 @@ const newsLatest=async (req, res)=> {
       .get(`${base_url}&q=${keyword}`)
       .then((response) => {
         const articles = response.data.articles;
+        console.log(articles);
    
         if (articles.length == 0)
           return res.status(404).send({ message: "no news found" });
         let news = [];
   
+  
         for (let i = 0; i < articles.length; i++) {
-
+ 
           let obj = {
-            title: `${i + 1}. ${articles[i].title}`,
+            title: ` ${articles[i].title}`,
             description: articles[i].description,
             url: articles[i].url,
+            image:articles[i].urlToImage
           };
   
           news.push(obj);
         }
+
     
         return res.status(200).send({status: true,message: `Showing top  results for "${keyword}"`,data: news});
     

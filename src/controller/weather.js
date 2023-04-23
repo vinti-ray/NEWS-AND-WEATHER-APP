@@ -26,21 +26,26 @@ const weatherReport=async (req, res) => {
   axios
     .get(`${BASE_URL}&q=${city}`)
     .then((response) => {
+      // console.log(response); 
       const weather = response.data.weather[0];
       const main = response.data.main;
-    //   console.log(response.data);
     let data={ 
-        description:`The weather in ${city} is ${weather.description}`,
-      temp:`${main.feels_like}°C`,
+        description:`${weather.description}`,
+      temp:`${main.temp}°C`,
       feels_like:`${main.feels_like}°C`,
       humidity:`${main.humidity}%`,
-      visibility:response.data.visibility
+      visibility:response.data.visibility,
+      tempMin:`${main.temp_min}°C`,
+      tempMax:`${main.temp_max}°C`,
+      sunrise:response.data.sys.sunrise,
+      sunset:response.data.sys.sunset
     }
-
+// console.log(data);
       return res.status(200).send({status:true,data:data})
 
     })
     .catch((err) => {
+      // console.log(err)
       
       return res.send({status:false,message:err.message})
 
